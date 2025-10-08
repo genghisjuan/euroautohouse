@@ -16,7 +16,6 @@ import {
 export const metadata = { title: "Services | Euro Auto House" };
 
 /* ----------------------------- Content Models ----------------------------- */
-// Hero bullets (trust builders)
 const heroBullets = [
   { icon: <ShieldCheck className="h-5 w-5" />, text: "ASE Certified" },
   { icon: <Scan className="h-5 w-5" />, text: "OEM Diagnostics (STAR / ISTA / ODIS)" },
@@ -24,7 +23,6 @@ const heroBullets = [
   { icon: <ClipboardCheck className="h-5 w-5" />, text: "Warranty-Friendly" },
 ];
 
-// Headline services
 const pillarServices = [
   {
     icon: <Gauge className="h-6 w-6 text-[var(--color-primary)]" />,
@@ -52,7 +50,6 @@ const pillarServices = [
   },
 ];
 
-// Packages (clear pricing anchors)
 const packages = [
   { name: "FLEX A Service", price: "$185", desc: "Entry interval for many Mercedes-Benz models; oil & key safety checks." },
   { name: "FLEX B Service", price: "$375", desc: "Expanded multi-point inspection and additional maintenance items." },
@@ -64,7 +61,6 @@ const packages = [
   },
 ];
 
-// À-la-carte items
 const alaCarte = [
   { name: "AMSOIL® Oil (from)", price: "$250" },
   { name: "Sprinter Oil Service", price: "$225" },
@@ -78,7 +74,6 @@ const alaCarte = [
   { name: "Brake + Rotor (from)", price: "$525" },
 ];
 
-// Mercedes FSS & BMW info (consumer-friendly)
 const brandInfo = [
   {
     heading: "Mercedes-Benz Flexible Service System (FSS)",
@@ -98,24 +93,7 @@ const brandInfo = [
   },
 ];
 
-/* --------------------------------- Partials -------------------------------- */
-const Accent = () => <div className="accent-bar" />;
-
-const Bullet = ({ icon, text }) => (
-  <li className="flex items-center gap-2 text-gray-700">
-    <span className="text-[var(--color-primary)]">{icon}</span>
-    <span className="text-sm">{text}</span>
-  </li>
-);
-
-const Pillar = ({ icon, title, text }) => (
-  <div className="card">
-    <div className="mb-3">{icon}</div>
-    <h3 className="h3 mb-1">{title}</h3>
-    <p className="text-gray-600 text-sm leading-relaxed">{text}</p>
-  </div>
-);
-
+/* -------------------------------- Components ------------------------------ */
 const PriceCard = ({ name, price, desc }) => (
   <div className="card">
     <div className="flex items-baseline justify-between">
@@ -138,52 +116,51 @@ export default function ServicesPage() {
     "telephone": SITE.phone,
     "address": { "@type": "PostalAddress", "streetAddress": SITE.address },
     "areaServed": "Sanford, FL",
-    "servesCuisine": undefined,
-    "url": process.env.NEXT_PUBLIC_SITE_URL || "",
     "priceRange": "$$",
-    "makesOffer": [
-      { "@type": "Offer", "itemOffered": "Diagnostics" },
-      { "@type": "Offer", "itemOffered": "Oil Service" },
-      { "@type": "Offer", "itemOffered": "Brake Service" },
-      { "@type": "Offer", "itemOffered": "Transmission Service" }
-    ]
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
 
-      {/* HERO */}
+      {/* HERO - refined to match full site */}
       <Section
         title="Full-Service Diagnostics for Your Luxury Vehicles"
         subtitle="Dealer-level capability, independent honesty. We explain your options clearly and stand behind every repair."
         className="pt-6"
       >
-        <div className="grid gap-4 md:grid-cols-4">
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {heroBullets.map((b, i) => (
-            <Bullet key={i} icon={b.icon} text={b.text} />
+            <div key={i} className="flex items-center gap-2 text-gray-700">
+              <span className="text-[var(--color-primary)]">{b.icon}</span>
+              <span className="text-sm">{b.text}</span>
+            </div>
           ))}
         </div>
 
-        <div className="mt-6">
-          <Link href="/contact" className="btn btn-primary mr-3">Request a Free Quote</Link>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link href="/contact" className="btn btn-primary">Request a Free Quote</Link>
           <a href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`} className="btn btn-accent">Call {SITE.phone}</a>
         </div>
       </Section>
 
-      {/* WHAT WE DO */}
+      {/* WHAT WE OFFER - consistent with rest of design */}
       <Section
         title="What We Offer"
         subtitle="We maintain and repair European vehicles with precision tools and factory-grade procedures."
       >
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mt-4">
           {pillarServices.map((s, i) => (
-            <Pillar key={i} {...s} />
+            <div key={i} className="card">
+              <div className="mb-3">{s.icon}</div>
+              <h3 className="h3 mb-1">{s.title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">{s.text}</p>
+            </div>
           ))}
         </div>
       </Section>
 
-      {/* PACKAGES / ANCHOR PRICING */}
+      {/* PACKAGES */}
       <Section
         title="Popular Service Packages"
         subtitle="Clear starting points. We’ll confirm the exact spec for your VIN before work begins."
@@ -220,7 +197,7 @@ export default function ServicesPage() {
         </p>
       </Section>
 
-      {/* BRAND-SPECIFIC GUIDANCE */}
+      {/* BRAND GUIDANCE */}
       <Section title="Brand-Specific Guidance" subtitle="Service intervals and features that matter for long-term reliability.">
         <div className="grid gap-6 md:grid-cols-2">
           {brandInfo.map((b) => (
@@ -241,7 +218,7 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      {/* TRUST / CTA */}
+      {/* CTA */}
       <Section className="text-center">
         <h2 className="h2 mb-2">Ready to keep your car feeling new?</h2>
         <p className="lead mb-6">
