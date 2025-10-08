@@ -1,43 +1,45 @@
 import Section from "@/components/Section";
-import InstagramGrid from "@/components/InstagramGrid";
+import InstagramEmbed from "@/components/InstagramEmbed";
 import { SITE } from "@/config/site.config";
 
 export const metadata = { title: "Gallery (Instagram) | Euro Auto House" };
 
-async function fetchInstagram() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/instagram`, {
-    // Revalidate on the server every hour; good default
-    next: { revalidate: 3600 },
-  });
-  if (!res.ok) return { ok: false, items: [], error: `HTTP ${res.status}` };
-  return res.json();
-}
+const IG_EMBED = process.env.NEXT_PUBLIC_IG_EMBED_URL || "";
 
-export default async function Gallery() {
-  const { ok, items, error } = await fetchInstagram();
-
+export default function Gallery() {
   return (
     <Section
       title="Gallery"
-      subtitle="Recent projects, shop moments, and customer favorites—straight from Instagram."
+      subtitle="Live from Instagram — recent projects, shop moments, and customer favorites."
     >
-      {!ok && (
-        <div className="card mb-6">
-          <p className="font-semibold">Instagram feed isn’t connected yet.</p>
-          <p className="opacity-80 text-sm mt-1">
-            Ask the business owner to add a long-lived token in Vercel (<code>IG_LONG_LIVED_TOKEN</code>).
+      {IG_EMBED ? (
+        <InstagramEmbed src={IG_EMBED} />
+      ) : (
+        <div className="card space-y-4">
+          <h3 className="text-xl font-bold">Instagram feed not connected (no token needed)</h3>
+          <p className="opacity-80">
+            Add a free embed URL to show the live feed here. Until then, you can view our work on Instagram.
           </p>
-          {!!error && <p className="opacity-60 text-xs mt-2">Error: {error}</p>}
-          <p className="mt-3">
-            You can also view our feed directly on{" "}
-            <a className="underline" href={SITE.social.instagram} target="_blank" rel="noreferrer">
-              Instagram
-            </a>.
-          </p>
+          <div className="flex gap-3">
+            <a
+              href={SITE.social.instagram}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-primary"
+            >
+              Open Instagram
+            </a>
+            <a
+              href="https://snapwidget.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-accent"
+            >
+              Get a free embed URL
+            </a>
+          </div>
         </div>
       )}
-
-      <InstagramGrid items={items} />
     </Section>
   );
 }
