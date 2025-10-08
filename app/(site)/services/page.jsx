@@ -1,245 +1,255 @@
-// app/(site)/services/page.jsx
 import Section from "@/components/Section";
-import ServicesGrid from "@/components/ServicesGrid";
-import PricingCard from "@/components/PricingCard";
-import Accordion from "@/components/Accordion";
-import StatBar from "@/components/StatBar";
-import BenefitsList from "@/components/BenefitsList";
-import Steps from "@/components/Steps";
-import Guarantee from "@/components/Guarantee";
-import StickyCTA from "@/components/StickyCTA";
+import Link from "next/link";
 import { SITE } from "@/config/site.config";
+import {
+  Gauge,
+  Droplet,
+  Wrench,
+  Scan,
+  ShieldCheck,
+  Car,
+  Settings2,
+  ClipboardCheck,
+  Sparkles,
+} from "lucide-react";
 
-export const metadata = { title: "Services & Pricing | Euro Auto House" };
+export const metadata = { title: "Services | Euro Auto House" };
 
-const pricing = [
-  { title: "FLEX A SERVICE", price: "$185" },
-  { title: "FLEX B SERVICE", price: "$375", note: "Full inspection & fluids" },
-  { title: "Mobil 1 Oil Service", price: "$125", note: "Mercedes-approved full synthetic" },
-  { title: "4 & 6 Cylinders (Oil)", price: "$110" },
-  { title: "8 Cyl. & V12 (Oil)", price: "$125" },
-  { title: "AMSOIL Oil", price: "from $250" },
-  { title: "Sprinter Oil Service", price: "$225" },
-  { title: "Buyer’s Inspection", price: "$150" },
-  { title: "Brake Flush", price: "$125" },
-  { title: "Air Filters", price: "$110" },
-  { title: "Mercedes Transmission Service", price: "$450" },
-  { title: "Motor Mounts", price: "from $850" },
-  { title: "Ceramic Brakes (per axle)", price: "$225" },
-  { title: "Differential Service", price: "$175" },
-  { title: "Brake + Rotor", price: "from $525" },
+/* ----------------------------- Content Models ----------------------------- */
+// Hero bullets (trust builders)
+const heroBullets = [
+  { icon: <ShieldCheck className="h-5 w-5" />, text: "ASE Certified" },
+  { icon: <Scan className="h-5 w-5" />, text: "OEM Diagnostics (STAR / ISTA / ODIS)" },
+  { icon: <Droplet className="h-5 w-5" />, text: "Mobil 1® Oils" },
+  { icon: <ClipboardCheck className="h-5 w-5" />, text: "Warranty-Friendly" },
 ];
 
-const faqs = [
+// Headline services
+const pillarServices = [
   {
-    q: "How often should I change my oil?",
-    a: (
-      <>
-        We recommend the earlier of <strong>5,000 miles</strong> or <strong>6 months</strong>. Waiting
-        10–15k (or for the indicator) can cause sludge that blocks cam solenoids and VANOS valves,
-        leading to expensive repairs.
-      </>
-    ),
+    icon: <Gauge className="h-6 w-6 text-[var(--color-primary)]" />,
+    title: "Full-Service Diagnostics",
+    text:
+      "Modern European vehicles monitor dozens of systems. We review codes with you and explain options clearly—only what your car needs.",
   },
   {
-    q: "Do you use dealer-level diagnostics?",
-    a: (
-      <>
-        Yes. We use <strong>STAR</strong> for Mercedes-Benz and <strong>GT1</strong> for BMW plus OEM-grade
-        tooling. You get the same capability you’d expect at a dealer—without the dealer pricing.
-      </>
-    ),
+    icon: <Droplet className="h-6 w-6 text-[var(--color-primary)]" />,
+    title: "Oil & Routine Maintenance",
+    text:
+      "Mobil 1® full synthetic, OEM filters, and factory intervals tailored to how you drive—protecting turbos, VANOS, and emissions systems.",
   },
   {
-    q: "Will I be pressured into repairs?",
-    a: (
-      <>
-        Never. We review the findings with you, prioritize safety, and only proceed with your approval.
-        Diagnostics are itemized and credited when you approve repairs.
-      </>
-    ),
+    icon: <Settings2 className="h-6 w-6 text-[var(--color-primary)]" />,
+    title: "Repairs & Systems",
+    text:
+      "Brakes, transmission service, A/C, suspension, electrical, and more—performed to factory specifications with OEM-level tools.",
   },
   {
-    q: "Are your techs certified?",
-    a: (
-      <>
-        Our technicians are <strong>factory-trained</strong> and <strong>ASE-certified</strong> with decades
-        of European experience.
-      </>
-    ),
+    icon: <Car className="h-6 w-6 text-[var(--color-primary)]" />,
+    title: "Mercedes / BMW Specialists",
+    text:
+      "FSS Service A/B guidance for Mercedes-Benz and condition-based service for BMW, including battery registration and adaptations.",
   },
 ];
 
+// Packages (clear pricing anchors)
+const packages = [
+  { name: "FLEX A Service", price: "$185", desc: "Entry interval for many Mercedes-Benz models; oil & key safety checks." },
+  { name: "FLEX B Service", price: "$375", desc: "Expanded multi-point inspection and additional maintenance items." },
+  { name: "Mobil 1® Oil Service", price: "$125", desc: "Premium full-synthetic oil & filter for eligible models." },
+  {
+    name: "Oil Service by Cylinder",
+    price: "4/6 cyl $110 · V12 $125",
+    desc: "Pricing guidance by engine type; exact quote varies by model & oil spec.",
+  },
+];
+
+// À-la-carte items
+const alaCarte = [
+  { name: "AMSOIL® Oil (from)", price: "$250" },
+  { name: "Sprinter Oil Service", price: "$225" },
+  { name: "Buyer’s Inspection", price: "$150" },
+  { name: "Brake Fluid Flush", price: "$125" },
+  { name: "Air Filters", price: "$110" },
+  { name: "Mercedes Transmission Service", price: "$450" },
+  { name: "Motor Mounts (from)", price: "$850" },
+  { name: "Ceramic Brake Pads (per axle)", price: "$225" },
+  { name: "Differential Service", price: "$175" },
+  { name: "Brake + Rotor (from)", price: "$525" },
+];
+
+// Mercedes FSS & BMW info (consumer-friendly)
+const brandInfo = [
+  {
+    heading: "Mercedes-Benz Flexible Service System (FSS)",
+    items: [
+      "Most 1998+ models follow Service A and B at alternating intervals.",
+      "Typical cadence: Service A around 10–13k miles, then B ~20k miles after—varies by model/age.",
+      "Your vehicle’s Maintenance Service Indicator will alert you by days and miles remaining.",
+    ],
+  },
+  {
+    heading: "BMW Condition-Based Service",
+    items: [
+      "The display tells you exactly what is due and when—oil, brakes, filters, etc.",
+      "Battery replacement requires registration so the charging strategy adapts correctly.",
+      "We walk you through what’s needed now vs. what can wait—no surprises.",
+    ],
+  },
+];
+
+/* --------------------------------- Partials -------------------------------- */
+const Accent = () => <div className="accent-bar" />;
+
+const Bullet = ({ icon, text }) => (
+  <li className="flex items-center gap-2 text-gray-700">
+    <span className="text-[var(--color-primary)]">{icon}</span>
+    <span className="text-sm">{text}</span>
+  </li>
+);
+
+const Pillar = ({ icon, title, text }) => (
+  <div className="card">
+    <div className="mb-3">{icon}</div>
+    <h3 className="h3 mb-1">{title}</h3>
+    <p className="text-gray-600 text-sm leading-relaxed">{text}</p>
+  </div>
+);
+
+const PriceCard = ({ name, price, desc }) => (
+  <div className="card">
+    <div className="flex items-baseline justify-between">
+      <h4 className="h3">{name}</h4>
+      <span className="text-[var(--color-primary)] font-semibold">{price}</span>
+    </div>
+    {desc && <p className="text-gray-600 text-sm mt-2">{desc}</p>}
+    <div className="mt-4">
+      <Link href="/contact" className="btn btn-primary">Get Exact Quote</Link>
+    </div>
+  </div>
+);
+
+/* ----------------------------------- Page ---------------------------------- */
 export default function ServicesPage() {
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": SITE.businessName,
+    "telephone": SITE.phone,
+    "address": { "@type": "PostalAddress", "streetAddress": SITE.address },
+    "areaServed": "Sanford, FL",
+    "servesCuisine": undefined,
+    "url": process.env.NEXT_PUBLIC_SITE_URL || "",
+    "priceRange": "$$",
+    "makesOffer": [
+      { "@type": "Offer", "itemOffered": "Diagnostics" },
+      { "@type": "Offer", "itemOffered": "Oil Service" },
+      { "@type": "Offer", "itemOffered": "Brake Service" },
+      { "@type": "Offer", "itemOffered": "Transmission Service" }
+    ]
+  };
+
   return (
     <>
-      <StatBar
-        items={[
-          { k: "Dealer-Level Diagnostics", v: "STAR / GT1" },
-          { k: "Mobil 1® Fluids", v: "Factory-approved" },
-          { k: "ASE Certified", v: "35+ yrs experience" },
-          { k: "Transparent Pricing", v: "Pay for actual time" },
-        ]}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
 
-      {/* HERO SUMMARY */}
+      {/* HERO */}
       <Section
-        title="Services & Prices"
-        subtitle="Fast, friendly, and factory-correct care for Mercedes-Benz, BMW, Audi & VW."
+        title="Full-Service Diagnostics for Your Luxury Vehicles"
+        subtitle="Dealer-level capability, independent honesty. We explain your options clearly and stand behind every repair."
+        className="pt-6"
       >
-        <div className="grid lg:grid-cols-2 gap-6">
-          <div className="card space-y-4">
-            <h3 className="text-xl font-bold">Oil Service That Protects Your Engine</h3>
-            <p>
-              Choose <strong>Mobil 1®</strong> full synthetic—engineered for European specs. We service luxury
-              engines with the right oil, filter, and torque to preserve performance and warranty.
-            </p>
-            <BenefitsList
-              items={[
-                "Correct spec oils & OEM filters",
-                "Digital inspection with photos on request",
-                "Torque to factory specs",
-                "Service light reset",
-              ]}
-            />
-            <div className="bg-neutral-50 dark:bg-neutral-900 border rounded-2xl p-4">
-              <p className="font-semibold">
-                Recommended interval: <u>5,000 miles</u> or <u>6 months</u>—whichever comes first.
-              </p>
-              <p className="opacity-80 mt-1">
-                Extends engine life and prevents sludge that can damage VANOS/cam solenoids.
-              </p>
-            </div>
-            <div className="flex gap-3">
-              <a href="/contact" className="btn btn-primary">{SITE.heroCTA}</a>
-              <a href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`} className="btn btn-accent">
-                Call {SITE.phone}
-              </a>
-            </div>
-          </div>
-
-          <div className="card space-y-4">
-            <h3 className="text-xl font-bold">Full-Service Diagnostics</h3>
-            <p>
-              Modern vehicles warn you long before a light appears. We scan, document, and explain
-              findings in plain English. If advanced troubleshooting is needed, it’s itemized—and
-              credited when you approve repairs.
-            </p>
-            <BenefitsList
-              items={[
-                "STAR for Mercedes-Benz • GT1 for BMW",
-                "OEM tooling & guided factory procedures",
-                "Prioritized estimates (safety • performance • maintenance)",
-                "You approve everything first",
-              ]}
-            />
-          </div>
-        </div>
-      </Section>
-
-      {/* CORE SERVICES SNAPSHOT */}
-      <Section
-        title="What We Offer"
-        subtitle="Dealer capability. Independent integrity."
-      >
-        <ServicesGrid detailed />
-      </Section>
-
-      {/* PRICING */}
-      <Section
-        title="Popular Services & Pricing"
-        subtitle="Straightforward rates. You pay for the time we actually work—never a book-time matrix."
-      >
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {pricing.map((p) => (
-            <PricingCard key={p.title} {...p} />
+        <div className="grid gap-4 md:grid-cols-4">
+          {heroBullets.map((b, i) => (
+            <Bullet key={i} icon={b.icon} text={b.text} />
           ))}
         </div>
-        <Guarantee className="mt-8" />
-      </Section>
 
-      {/* MERCEDES FSS + MSI */}
-      <Section title="Mercedes-Benz Maintenance, Simplified" subtitle="Understanding Flexible Service System (FSS) & MSI notifications.">
-        <div className="grid lg:grid-cols-2 gap-6">
-          <div className="card space-y-3">
-            <p>
-              1998+ Mercedes models use <strong>FSS</strong> service intervals (A, B, and beyond depending on model/age).
-              Typically:
-            </p>
-            <BenefitsList
-              items={[
-                "Service A: ~10k miles and every 20k thereafter",
-                "Service B: ~20k miles and every 20k thereafter",
-                "Intervals can vary by model and driving conditions",
-              ]}
-            />
-            <p className="opacity-80">We’ll time services with your car’s data and driving habits.</p>
-          </div>
-          <div className="card">
-            <h4 className="font-bold text-lg mb-2">Your MSI (Maintenance Service Indicator)</h4>
-            <p className="mb-3">
-              Expect countdown messages like “Service A in XX Days/Miles.” When due, you’ll see “Service A Due Now.”
-              If overdue, it displays “Service A Exceeded…” along with a tone. We’ll review the MSI with you and plan
-              the right visit.
-            </p>
-            <Steps
-              items={[
-                "Scan & review MSI/faults together",
-                "Clarify must-do vs. can-wait",
-                "Approve estimate digitally",
-                "Service performed to factory spec",
-              ]}
-            />
-          </div>
+        <div className="mt-6">
+          <Link href="/contact" className="btn btn-primary mr-3">Request a Free Quote</Link>
+          <a href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`} className="btn btn-accent">Call {SITE.phone}</a>
         </div>
       </Section>
 
-      {/* BMW SERVICE NOTE */}
-      <Section title="BMW Service" subtitle="We use your vehicle’s display to determine exactly what’s due.">
-        <div className="card">
-          Some items won’t coincide with an oil service. Your display will flag what’s needed and when.
-          We’ll show you today’s priorities and help you plan the rest.
+      {/* WHAT WE DO */}
+      <Section
+        title="What We Offer"
+        subtitle="We maintain and repair European vehicles with precision tools and factory-grade procedures."
+      >
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mt-4">
+          {pillarServices.map((s, i) => (
+            <Pillar key={i} {...s} />
+          ))}
         </div>
       </Section>
 
-      {/* SERVICE A DETAILS */}
-      <Section title="Mercedes-Benz Service A — What’s Included">
-        <Accordion
-          items={[
-            {
-              title: "Service A Checklist",
-              content: (
-                <ul className="list-disc pl-5 space-y-2">
-                  <li>Change engine oil and filter</li>
-                  <li>Check warning/indicator lamps and horn</li>
-                  <li>Check windshield & headlamp washer/wiper function & fluids</li>
-                  <li>Ensure seat belts function correctly</li>
-                  <li>Inspect tires and pressure (incl. spare)</li>
-                  <li>Inspect brake pad thickness and disc condition</li>
-                  <li>Check & correct all fluid levels</li>
-                  <li>Reset FSS counter</li>
-                </ul>
-              ),
-            },
-          ]}
-        />
-      </Section>
-
-      {/* FAQ */}
-      <Section title="Frequently Asked Questions">
-        <Accordion items={faqs.map(f => ({ title: f.q, content: f.a }))} />
-      </Section>
-
-      {/* BOTTOM CTA */}
-      <Section>
-        <div className="text-center">
-          <a href="/contact" className="btn btn-primary">{SITE.heroCTA}</a>
-          <a href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`} className="btn btn-accent ml-3">Call {SITE.phone}</a>
+      {/* PACKAGES / ANCHOR PRICING */}
+      <Section
+        title="Popular Service Packages"
+        subtitle="Clear starting points. We’ll confirm the exact spec for your VIN before work begins."
+      >
+        <div className="grid gap-6 md:grid-cols-2">
+          {packages.map((p, i) => (
+            <PriceCard key={i} {...p} />
+          ))}
         </div>
       </Section>
 
-      {/* Mobile sticky CTA */}
-      <StickyCTA phone={SITE.phone} />
+      {/* À-LA-CARTE MENU */}
+      <Section title="À-La-Carte Services" subtitle="Focused items you can book individually or bundle.">
+        <div className="overflow-hidden rounded-2xl border">
+          <table className="w-full text-sm md:text-base">
+            <thead className="bg-neutral-100">
+              <tr>
+                <th className="text-left p-3">Service</th>
+                <th className="text-right p-3">From</th>
+              </tr>
+            </thead>
+            <tbody>
+              {alaCarte.map((row) => (
+                <tr key={row.name} className="border-t">
+                  <td className="p-3">{row.name}</td>
+                  <td className="p-3 text-right text-[var(--color-primary)] font-semibold">{row.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-gray-500 text-xs mt-3">
+          Pricing varies by model, oil specification, and parts selection. We always confirm before any work.
+        </p>
+      </Section>
+
+      {/* BRAND-SPECIFIC GUIDANCE */}
+      <Section title="Brand-Specific Guidance" subtitle="Service intervals and features that matter for long-term reliability.">
+        <div className="grid gap-6 md:grid-cols-2">
+          {brandInfo.map((b) => (
+            <div key={b.heading} className="card">
+              <h3 className="h3 mb-3">{b.heading}</h3>
+              <ul className="space-y-2 text-gray-700 text-sm">
+                {b.items.map((t) => (
+                  <li key={t} className="flex gap-2">
+                    <span className="text-[var(--color-primary)] mt-1">
+                      <Sparkles className="h-4 w-4" />
+                    </span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* TRUST / CTA */}
+      <Section className="text-center">
+        <h2 className="h2 mb-2">Ready to keep your car feeling new?</h2>
+        <p className="lead mb-6">
+          Get a transparent estimate and a service plan that fits your vehicle and driving style.
+        </p>
+        <Link href="/contact" className="btn btn-primary mr-3">Request a Quote</Link>
+        <a href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`} className="btn btn-accent">Call {SITE.phone}</a>
+      </Section>
     </>
   );
 }
