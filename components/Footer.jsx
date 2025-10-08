@@ -1,3 +1,6 @@
+// components/Footer.jsx
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { SITE } from "@/config/site.config";
@@ -6,9 +9,9 @@ import { Facebook, Instagram } from "lucide-react";
 export default function Footer() {
   return (
     <footer role="contentinfo" className="mt-16 bg-black text-white">
-      {/* Upper content */}
+      {/* Top section */}
       <div className="container-tight py-10">
-        {/* Row: Logo + Socials inline, left-aligned */}
+        {/* Logo and social icons inline */}
         <div className="flex items-center gap-4">
           <Image
             src="/logo.png"
@@ -24,8 +27,8 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
               aria-label="Facebook"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 hover:bg-white/10 transition"
               title="Facebook"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 hover:bg-white/10 transition"
             >
               <Facebook className="h-5 w-5 text-[#1877F2]" />
             </a>
@@ -36,15 +39,15 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 hover:bg-white/10 transition"
               title="Instagram"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 hover:bg-white/10 transition"
             >
               <Instagram className="h-5 w-5 text-white" />
             </a>
           )}
         </div>
 
-        {/* Email on its own line, then address under it with "Open in Maps" */}
+        {/* Contact info */}
         <div className="mt-5 space-y-2 text-sm">
           <p>
             <a
@@ -54,7 +57,6 @@ export default function Footer() {
               {SITE.email}
             </a>
           </p>
-
           <p className="text-white/85">
             {SITE.address}{" "}
             <Link
@@ -68,7 +70,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar: centered copyright ONLY */}
+      {/* Copyright bar */}
       <div className="border-t border-white/10">
         <div className="container-tight py-4 text-center text-xs text-white/70">
           © {new Date().getFullYear()} {SITE.businessName}. All rights reserved.
