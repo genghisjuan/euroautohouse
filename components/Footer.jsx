@@ -93,7 +93,6 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-tight py-4 text-xs text-white/60 flex flex-col md:flex-row items-center justify-between gap-2">
           <span>© {new Date().getFullYear()} {SITE.businessName}. All rights reserved.</span>
-          <span className="text-white/40">European Vehicle Specialists — Mercedes · BMW · Audi · VW</span>
         </div>
       </div>
     </footer>
