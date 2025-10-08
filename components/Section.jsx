@@ -1,9 +1,13 @@
-export default function Section({id, title, subtitle, children}){
+export default function Section({ title, subtitle, children, className = "" }) {
   return (
-    <section id={id} className="section">
+    <section className={`section ${className}`}>
       <div className="container-tight">
-        {title && <h2 className="h2 mb-2">{title}</h2>}
-        {subtitle && <p className="lead mb-8">{subtitle}</p>}
+        {(title || subtitle) && (
+          <header className="section-header">
+            {title && <h1 className="section-title">{title}</h1>}
+            {subtitle && <p className="section-subtitle mt-2">{subtitle}</p>}
+          </header>
+        )}
         {children}
       </div>
     </section>
