@@ -6,7 +6,6 @@ import { ShieldCheck, Wrench, Car, Award, Gauge, Droplet, Clock } from "lucide-r
 
 export const metadata = { title: `${SITE.businessName} | ${SITE.tagline}` };
 
-// Stat highlights
 const stats = [
   { label: "5-Star Reviews", value: "650+", icon: <Award className="h-5 w-5 text-[var(--color-primary)]" /> },
   { label: "Years Experience", value: "35+", icon: <Clock className="h-5 w-5 text-[var(--color-primary)]" /> },
@@ -14,7 +13,6 @@ const stats = [
   { label: "OEM Diagnostics", value: "OEM", icon: <Wrench className="h-5 w-5 text-[var(--color-primary)]" /> },
 ];
 
-// Services grid
 const services = [
   {
     icon: <Gauge className="h-6 w-6 text-[var(--color-primary)]" />,
@@ -41,28 +39,34 @@ const services = [
 export default function Home() {
   return (
     <>
-      {/* Hero */}
+      {/* HERO */}
       <section className="relative flex items-center justify-center bg-black/70">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/hero-mercedes.jpg"
-            alt="Luxury Mercedes diagnostics"
+            src="/hero.jpg"
+            alt="Luxury European car diagnostics"
             fill
-            className="object-cover brightness-75"
+            className="object-cover brightness-[0.7]"
             priority
           />
         </div>
 
         <div className="container-tight py-28 text-center text-white max-w-3xl">
-          <h1 className="h1 text-white mb-3">Full-Service Diagnostics for Your Luxury Vehicle</h1>
+          <h1 className="h1 text-white mb-3">
+            Full-Service Diagnostics for Your Luxury Vehicle
+          </h1>
           <p className="lead mb-8 text-gray-200">
             Dealer-level care for Mercedes-Benz, BMW, VW, and Audi owners.  
             Expert technicians who explain your car in plain English—and stand behind every repair.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/contact" className="btn btn-primary">Request a Quote</Link>
-            <a href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`} className="btn btn-accent">Call {SITE.phone}</a>
+            <Link href="/contact" className="btn btn-primary">
+              Request a Quote
+            </Link>
+            <a href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`} className="btn btn-accent">
+              Call {SITE.phone}
+            </a>
           </div>
 
           <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-300">
@@ -74,7 +78,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats */}
+      {/* STATS */}
       <div className="bg-[var(--surface-muted)] border-t border-b border-[var(--border)] py-6">
         <div className="container-tight grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {stats.map((s, i) => (
@@ -89,7 +93,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* What We Offer */}
+      {/* WHAT WE OFFER */}
       <Section
         title="What We Offer"
         subtitle="Dealer-level capability with hometown service. We diagnose, repair, and maintain European cars with precision and honesty."
@@ -105,15 +109,19 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* CTA Banner */}
+      {/* CTA */}
       <section className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white text-center py-12">
         <div className="container-tight">
-          <h2 className="text-2xl font-semibold mb-4">Your European Car Deserves Expert Care</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            Your European Car Deserves Expert Care
+          </h2>
           <p className="text-gray-100 mb-6">
             Let our certified specialists keep your vehicle running like new—with transparent service, OEM diagnostics, and factory-grade precision.
           </p>
           <div className="flex justify-center gap-4">
-            <Link href="/services" className="btn btn-accent text-black">View Services</Link>
+            <Link href="/services" className="btn btn-accent text-black">
+              View Services
+            </Link>
             <Link href="/contact" className="btn btn-primary bg-black text-white hover:opacity-90">
               Schedule Appointment
             </Link>
