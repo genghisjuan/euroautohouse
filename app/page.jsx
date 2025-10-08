@@ -10,43 +10,56 @@ export default function HomePage() {
   return (
     <>
       {/* HERO SECTION */}
-      <section className="relative flex items-center justify-center h-[90vh] bg-black text-white">
-        <Image
-          src="/hero.jpg"
-          alt="Euro Auto House Mercedes"
-          fill
-          className="object-cover opacity-60"
-          priority
-        />
-        <div className="relative z-10 text-center px-4 max-w-2xl">
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-            Full-Service Diagnostics for Your Luxury Vehicle
-          </h1>
-          <p className="mt-4 text-base md:text-lg text-white/90">
-            Dealer-level care for Mercedes-Benz, BMW, VW, and Audi owners. Expert technicians who
-            explain your car in plain English—and stand behind every repair.
-          </p>
+<section className="relative flex items-center justify-center h-[90vh] bg-black text-white">
+  <Image
+    src="/hero.jpg"
+    alt="Euro Auto House Mercedes"
+    fill
+    className="object-cover opacity-60"
+    priority
+  />
+  <div className="relative z-10 text-center px-4 max-w-2xl">
+    <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+      Full-Service Diagnostics for Your Luxury Vehicles
+    </h1>
+    <p className="mt-4 text-base md:text-lg text-white/90">
+      Dealer-level capability, independent honesty. We explain your options clearly and
+      stand behind every repair.
+    </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/contact" className="btn btn-primary">
-              Request a Quote
-            </Link>
-            <a
-              href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`}
-              className="btn bg-[var(--color-accent)] text-black hover:opacity-90"
-            >
-              Call {SITE.phone}
-            </a>
-          </div>
+    <div className="mt-8 flex flex-wrap justify-center gap-4">
+      <Link href="/contact" className="btn btn-primary">
+        Request a Free Quote
+      </Link>
+      <a
+        href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`}
+        className="btn bg-[var(--color-accent)] text-black hover:opacity-90"
+      >
+        Call {SITE.phone}
+      </a>
+    </div>
 
-          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-white/80">
-            <span>ASE Certified</span>
-            <span>OEM Diagnostics</span>
-            <span>Mobil 1® Oils</span>
-            <span>Warranty-Friendly</span>
-          </div>
-        </div>
-      </section>
+    <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-white/85">
+      <div className="flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" /></svg>
+        <span>ASE Certified</span>
+      </div>
+      <div className="flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v8m4-4H8" /></svg>
+        <span>OEM Diagnostics</span>
+      </div>
+      <div className="flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+        <span>Mobil 1® Oils</span>
+      </div>
+      <div className="flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+        <span>Warranty-Friendly</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* STATS BAR */}
       <section className="bg-neutral-50 py-10 border-b">
