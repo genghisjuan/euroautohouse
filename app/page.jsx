@@ -116,7 +116,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA SECTION — gradient outline box */}
+      {/* CTA SECTION — refined gradient outline and CTA color harmony */}
       <section className="text-white text-center py-16 bg-[var(--color-primary)] relative">
         <div
           className="container-tight relative max-w-3xl mx-auto p-[2px] rounded-2xl"
@@ -124,24 +124,24 @@ export default function HomePage() {
             background: "linear-gradient(90deg, #a80f0f, #eab308)",
           }}
         >
-          <div className="bg-[var(--color-primary)] rounded-2xl py-10 px-6">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-3">
+          <div className="bg-white rounded-2xl py-10 px-6 text-black">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-3 text-gray-900">
               Your European Car Deserves Expert Care
             </h2>
-            <p className="text-white/90 mb-8 max-w-2xl mx-auto text-base md:text-lg">
+            <p className="text-gray-700 mb-8 max-w-2xl mx-auto text-base md:text-lg">
               Let our certified specialists keep your vehicle running like new—with transparent
               service, OEM diagnostics, and factory-grade precision.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/services"
-                className="rounded-full bg-white text-black font-semibold px-8 py-3 text-sm md:text-base hover:opacity-90 transition"
+                className="rounded-full bg-[#a80f0f] text-white font-semibold px-8 py-3 text-sm md:text-base hover:opacity-90 transition"
               >
                 View Services
               </Link>
               <Link
                 href="/contact"
-                className="rounded-full bg-black text-white font-semibold px-8 py-3 text-sm md:text-base hover:opacity-90 transition"
+                className="rounded-full bg-[#eab308] text-black font-semibold px-8 py-3 text-sm md:text-base hover:opacity-90 transition"
               >
                 Schedule Appointment
               </Link>
