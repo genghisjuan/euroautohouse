@@ -1,31 +1,46 @@
 import Section from "@/components/Section";
-import InstagramGrid from "@/components/InstagramGrid";
-import { getInstagramMedia } from "@/lib/instagram";
+import InstagramEmbed from "@/components/InstagramEmbed";
 import { SITE } from "@/config/site.config";
 
 export const metadata = { title: "Gallery (Instagram) | Euro Auto House" };
 
-export default async function Gallery() {
-  const { items, ok, error } = await getInstagramMedia(18);
+// Optional env var so you can swap widgets without code changes
+const IG_EMBED = process.env.NEXT_PUBLIC_IG_EMBED_URL || "";
 
+export default function Gallery() {
   return (
     <Section
       title="Gallery"
-      subtitle="Live from our Instagram — recent projects, shop moments, and customer favorites."
+      subtitle="Live from Instagram — recent projects, shop moments, and customer favorites."
     >
-      {!ok && (
-        <div className="card mb-6">
-          <p className="font-semibold">Instagram feed isn’t connected yet.</p>
-          <p className="opacity-80 text-sm mt-1">
-            Add a valid token to <code>NEXT_PUBLIC_IG_TOKEN</code> in Vercel → Project → Settings → Environment Variables,
-            then redeploy. You can always view our feed directly on{" "}
-            <a className="underline" href={SITE.social.instagram} target="_blank" rel="noreferrer">Instagram</a>.
+      {IG_EMBED ? (
+        <InstagramEmbed src={IG_EMBED} />
+      ) : (
+        <div className="card space-y-4">
+          <h3 className="text-xl font-bold">Instagram feed not connected (no token needed)</h3>
+          <p className="opacity-80">
+            Add a free embed URL to show the live feed here. Until then, you can view our work on Instagram.
           </p>
-          {!!error && <p className="opacity-60 text-xs mt-2">Error: {error}</p>}
+          <div className="flex gap-3">
+            <a
+              href={SITE.social.instagram}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-primary"
+            >
+              Open Instagram
+            </a>
+            <a
+              href="https://snapwidget.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-accent"
+            >
+              Get a free embed URL
+            </a>
+          </div>
         </div>
       )}
-
-      <InstagramGrid items={items} />
     </Section>
   );
 }
