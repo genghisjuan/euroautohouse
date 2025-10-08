@@ -1,32 +1,78 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
-:root{
-  --color-primary: #b51716;
-  --color-accent: #fabd12;
-  --color-base: #000000;
-  --color-contrast: #ffffff;
-}
-.dark{
-  --color-base: #000000;
-  --color-contrast: #ffffff;
-}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root{
-  --bg: var(--color-contrast);
-  --fg: var(--color-base);
+
+/* ---------- Brand Tokens ---------- */
+:root {
+  --color-primary: #b51716; /* red */
+  --color-accent: #fabd12;  /* gold */
+  --text-strong: #111111;
+  --text: #1f2937;          /* gray-800 */
+  --text-soft: #6b7280;     /* gray-500 */
+  --surface: #ffffff;
+  --surface-muted: #f8fafc; /* slate-50 */
+  --border: #e5e7eb;        /* gray-200 */
 }
-html { scroll-behavior: smooth; }
-body { font-family: Arial, Helvetica, sans-serif; background: var(--bg); color: var(--fg); }
-.container-tight{ @apply max-w-6xl mx-auto px-4; }
-.btn{ @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 font-semibold transition; }
-.btn-primary{ background: var(--color-primary); color: white; }
-.btn-primary:hover{ filter: brightness(1.05); }
-.btn-accent{ background: var(--color-accent); color: black; }
-.card{ @apply rounded-3xl shadow-xl p-6 bg-white text-black dark:bg-neutral-900 dark:text-white; }
-.section{ @apply py-16 md:py-24; }
-.h1{ font-family: 'Poppins', Arial, Helvetica, sans-serif; @apply text-4xl md:text-6xl font-extrabold; }
-.h2{ font-family: 'Poppins', Arial, Helvetica, sans-serif; @apply text-3xl md:text-4xl font-extrabold; }
-.lead{ @apply text-lg md:text-xl opacity-80; }
-.sticky-call{ @apply fixed bottom-0 left-0 right-0 z-40 md:hidden; }
-.sticky-call a{ @apply w-full btn btn-primary rounded-none; }
+
+/* ---------- Base Typography ---------- */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-white text-[16px] text-gray-800 antialiased;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  /* Headings: calm, confident */
+  h1, .h1 { @apply tracking-tight text-gray-900; font-weight: 700; font-family: 'Poppins', Arial, Helvetica, sans-serif; }
+  h2, .h2 { @apply tracking-tight text-gray-900; font-weight: 600; font-family: 'Poppins', Arial, Helvetica, sans-serif; }
+  h3, .h3 { @apply tracking-tight text-gray-900; font-weight: 600; font-family: 'Poppins', Arial, Helvetica, sans-serif; }
+
+  /* Sizes (desktop) */
+  .h1 { font-size: 2.25rem; line-height: 1.2; }     /* 36px */
+  .h2 { font-size: 1.5rem;  line-height: 1.3; }     /* 24px */
+  .h3 { font-size: 1.125rem; line-height: 1.4; }    /* 18px */
+
+  /* Body text */
+  p { @apply leading-relaxed text-gray-700; }
+  .lead { @apply text-gray-600; font-size: 1rem; line-height: 1.7; }
+
+  /* Mobile adjustments */
+  @media (max-width: 767px) {
+    .h1 { font-size: 1.75rem; }   /* 28px */
+    .h2 { font-size: 1.25rem; }   /* 20px */
+    .h3 { font-size: 1rem; }      /* 16px */
+    .lead { font-size: 0.9375rem; }
+  }
+}
+
+/* ---------- Layout Helpers ---------- */
+@layer components {
+  .container-tight { @apply max-w-6xl mx-auto px-4; }
+
+  /* Section wrapper with consistent rhythm */
+  .section { @apply py-10 md:py-14; }
+  .section-header { @apply mb-6 md:mb-8; }
+  .section-title { @apply h1; }
+  .section-subtitle { @apply lead; }
+
+  /* Accent bar (thin, premium) */
+  .accent-bar {
+    @apply h-1 w-14 rounded-full bg-gradient-to-r;
+    background-image: linear-gradient(to right, var(--color-primary), var(--color-accent));
+  }
+
+  /* Card */
+  .card {
+    @apply bg-white rounded-2xl p-6 shadow-lg transition-all duration-300;
+  }
+  .card:hover { @apply shadow-xl -translate-y-0.5; }
+
+  /* Buttons */
+  .btn { @apply inline-flex items-center justify-center rounded-full px-4 py-2 font-semibold transition; }
+  .btn-primary { @apply text-white; background-color: var(--color-primary); }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-accent { color: #111; background-color: var(--color-accent); }
+  .btn-accent:hover { filter: brightness(1.05); }
+
+  /* Links */
+  .link { @apply underline decoration-2 underline-offset-4 hover:opacity-80; }
+}
