@@ -1,7 +1,3 @@
-
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 import Section from "@/components/Section";
 import Link from "next/link";
 import { SITE } from "@/config/site.config";
