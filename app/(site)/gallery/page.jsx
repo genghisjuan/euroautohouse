@@ -3,38 +3,40 @@ import Image from "next/image";
 
 export const metadata = { title: "Gallery | Euro Auto House" };
 
+// Square images (1080x1080)
 const galleryImages = [
-  { src: "/images/gallery1.jpg", alt: "Euro Auto House Workshop" },
-  { src: "/images/gallery2.jpg", alt: "Mercedes-Benz Maintenance" },
-  { src: "/images/gallery3.jpg", alt: "BMW Engine Diagnostics" },
-  { src: "/images/gallery4.jpg", alt: "Audi Performance Service" },
-  { src: "/images/gallery5.jpg", alt: "VW Repair Bay" },
-  { src: "/images/gallery6.jpg", alt: "Certified Technicians at Work" },
+  { src: "/images/gallery1.jpg", alt: "Gallery Image 1" },
+  { src: "/images/gallery2.jpg", alt: "Gallery Image 2" },
+  { src: "/images/gallery3.jpg", alt: "Gallery Image 3" },
+  { src: "/images/gallery4.jpg", alt: "Gallery Image 4" },
+  { src: "/images/gallery5.jpg", alt: "Gallery Image 5" },
+  { src: "/images/gallery6.jpg", alt: "Gallery Image 6" },
+  { src: "/images/gallery7.jpg", alt: "Gallery Image 7" },
+  { src: "/images/gallery8.jpg", alt: "Gallery Image 8" },
+  { src: "/images/gallery9.jpg", alt: "Gallery Image 9" },
 ];
 
 export default function Gallery() {
   return (
     <Section
-      title="Our Gallery"
-      subtitle="A glimpse inside our facility — where precision, quality, and European engineering meet expert care."
+      title="Gallery"
+      subtitle="A showcase of our craftsmanship, facility, and luxury European vehicles we service."
     >
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {galleryImages.map((img, index) => (
           <div
             key={index}
-            className="relative group overflow-hidden rounded-2xl shadow-lg transition-transform duration-300 hover:scale-[1.02]"
+            className="overflow-hidden rounded-2xl shadow-md transition-transform duration-300 hover:scale-[1.02]"
           >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              width={600}
-              height={400}
-              className="object-cover w-full h-64 md:h-72"
-            />
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
-              <p className="text-white text-lg font-semibold text-center px-4">
-                {img.alt}
-              </p>
+            <div className="relative w-full aspect-square">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                priority={index < 3}
+              />
             </div>
           </div>
         ))}
