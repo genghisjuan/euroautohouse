@@ -9,8 +9,8 @@ export const metadata = { title: "Euro Auto House | European Auto Repair Special
 export default function HomePage() {
   return (
     <>
-      {/* HERO SECTION */}
-            <section className="relative flex items-center justify-center bg-black/70">
+      {/* HERO SECTION (unchanged) */}
+      <section className="relative flex items-center justify-center bg-black/70">
         <div className="absolute inset-0 -z-10">
           <Image
             src="/hero.jpg"
@@ -26,7 +26,7 @@ export default function HomePage() {
             Full-Service Diagnostics for Your Luxury Vehicle
           </h1>
           <p className="lead mb-8 text-gray-200">
-            Dealer-level care for Mercedes-Benz, BMW, VW, and Audi owners.  
+            Dealer-level care for Mercedes-Benz, BMW, VW, and Audi owners.{" "}
             Expert technicians who explain your car in plain English—and stand behind every repair.
           </p>
 
@@ -48,7 +48,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* STATS BAR */}
+      {/* STATS BAR (unchanged) */}
       <section className="bg-neutral-50 py-10 border-b">
         <div className="container-tight grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div>
@@ -70,7 +70,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* WHAT WE OFFER */}
+      {/* WHAT WE OFFER (unchanged) */}
       <section className="py-16">
         <div className="container-tight text-center mb-10">
           <h2 className="text-3xl font-bold text-gray-900 mb-2">What We Offer</h2>
@@ -116,32 +116,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section
-        className="text-white text-center py-14"
-        style={{
-          backgroundImage:
-            "linear-gradient(90deg, #7f0f10 0%, #b51716 35%, #d57f0e 70%, #eab308 100%)",
-        }}
-      >
-        <div className="container-tight">
-          <h2 className="text-2xl font-semibold mb-3">
+      {/* CTA SECTION — solid brand color (gradient removed) */}
+      <section className="text-white text-center py-16 bg-[var(--color-primary)]">
+        <div className="container-tight px-4">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-3">
             Your European Car Deserves Expert Care
           </h2>
-          <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+          <p className="text-white/90 mb-8 max-w-2xl mx-auto text-base md:text-lg">
             Let our certified specialists keep your vehicle running like new—with transparent
             service, OEM diagnostics, and factory-grade precision.
           </p>
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/services"
-              className="rounded-full bg-white text-black font-semibold px-6 py-2 hover:opacity-90"
+              className="rounded-full bg-white text-black font-semibold px-8 py-3 text-sm md:text-base hover:opacity-90 transition"
             >
               View Services
             </Link>
             <Link
               href="/contact"
-              className="rounded-full bg-black text-white font-semibold px-6 py-2 hover:opacity-90"
+              className="rounded-full bg-black text-white font-semibold px-8 py-3 text-sm md:text-base hover:opacity-90 transition"
             >
               Schedule Appointment
             </Link>
