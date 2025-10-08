@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata = {
+  metadataBase: new URL("https://euroautohouse.vercel.app"),
   title: defaultSEO.title,
   description: defaultSEO.description,
   keywords: defaultSEO.keywords,
