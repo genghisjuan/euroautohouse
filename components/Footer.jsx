@@ -53,13 +53,13 @@ export default function Footer() {
           </h3>
           <a
             href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`}
-            className="underline underline-offset-4 decoration-2 hover:opacity-80 text-white"
+            className="decoration-2 hover:opacity-80 text-white"
           >
             {SITE.phone}
           </a>
           <a
             href={`mailto:${SITE.email}`}
-            className="underline underline-offset-4 decoration-2 hover:opacity-80 text-white break-all"
+            className="decoration-2 hover:opacity-80 text-white break-all"
           >
             {SITE.email}
           </a>
