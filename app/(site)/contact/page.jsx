@@ -1,3 +1,7 @@
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import Section from "@/components/Section";
 import ContactForm from "@/components/ContactForm";
 import MapEmbed from "@/components/MapEmbed";
