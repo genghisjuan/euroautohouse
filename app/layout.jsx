@@ -1,35 +1,27 @@
 // app/layout.jsx
 import "./globals.css";
-import { SITE } from "@/config/site.config";
-import { defaultSEO, jsonLd } from "@/config/seo";
-import Header from "@/components/Header";
+import dynamic from "next/dynamic";
 import Footer from "@/components/Footer";
 
+// If your Navbar uses any client-only hooks (auth, window, etc),
+// load it on the client only (no SSR) to avoid build-time crashes.
+const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata = {
-  metadataBase: new URL("https://euroautohouse.vercel.app"),
-  title: defaultSEO.title,
-  description: defaultSEO.description,
-  keywords: defaultSEO.keywords,
-  openGraph: {
-    title: defaultSEO.title,
-    description: defaultSEO.description,
-    url: defaultSEO.url,
-    images: defaultSEO.images,
-  },
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  title: "Euro Auto House",
+  description: "European auto repair specialists in Sanford, FL",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta name="theme-color" content={SITE.colors.primary} />
-        <script id="ld-json" type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      </head>
-      <body className="min-h-screen bg-background text-foreground antialiased">
-        <Header />
-        <main className="pt-20">{children}</main>
+    <html lang="en">
+      <body className="antialiased">
+        {/* Client-only navbar */}
+        <Navbar />
+        {children}
         <Footer />
       </body>
     </html>
