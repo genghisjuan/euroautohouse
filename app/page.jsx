@@ -10,6 +10,11 @@ export default function HomePage() {
   return (
     <>
       {/* HERO SECTION */}
+            <section className="relative flex items-center justify-center bg-black/70">
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="/hero.jpg"
+            alt="Luxury European car diagnostics"
             fill
             className="object-cover brightness-[0.7]"
             priority
