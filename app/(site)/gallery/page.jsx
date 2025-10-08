@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import Section from "@/components/Section";
 import Image from "next/image";
 
