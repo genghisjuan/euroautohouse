@@ -63,9 +63,6 @@ export default function Footer() {
           >
             {SITE.email}
           </a>
-          <h3 className="text-base font-semibold text-white tracking-tight mt-4 mb-1">
-            Visit
-          </h3>
           <address className="not-italic text-white/85">{SITE.address}</address>
           <a
             href={SITE.mapUrl}
