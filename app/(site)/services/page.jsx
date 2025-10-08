@@ -17,10 +17,10 @@ export const metadata = { title: "Services | Euro Auto House" };
 
 /* ----------------------------- Content Models ----------------------------- */
 const heroBullets = [
-  { icon: <ShieldCheck className="h-5 w-5" />, text: "ASE Certified" },
-  { icon: <Scan className="h-5 w-5" />, text: "OEM Diagnostics (STAR / ISTA / ODIS)" },
-  { icon: <Droplet className="h-5 w-5" />, text: "Mobil 1® Oils" },
-  { icon: <ClipboardCheck className="h-5 w-5" />, text: "Warranty-Friendly" },
+  { icon: ShieldCheck, text: "ASE Certified" },
+  { icon: Scan,         text: "OEM Diagnostics (STAR / ISTA / ODIS)" },
+  { icon: Droplet,      text: "Mobil 1® Oils" },
+  { icon: ClipboardCheck, text: "Warranty-Friendly" },
 ];
 
 const pillarServices = [
@@ -123,28 +123,40 @@ export default function ServicesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
 
-      {/* HERO - refined to match full site */}
-      <Section
-        title="Full-Service Diagnostics for Your Luxury Vehicles"
-        subtitle="Dealer-level capability, independent honesty. We explain your options clearly and stand behind every repair."
-        className="pt-6"
-      >
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {heroBullets.map((b, i) => (
-            <div key={i} className="flex items-center gap-2 text-gray-700">
-              <span className="text-[var(--color-primary)]">{b.icon}</span>
-              <span className="text-sm">{b.text}</span>
-            </div>
-          ))}
-        </div>
+      {/* HERO — refined, premium card with icon chips */}
+      <Section className="pt-6">
+        <div className="rounded-2xl border bg-[var(--surface-muted)] p-6 md:p-8">
+          <div className="max-w-3xl">
+            <h1 className="h1 mb-2">Full-Service Diagnostics for Your Luxury Vehicles</h1>
+            <p className="lead">
+              Dealer-level capability, independent honesty. We explain your options clearly and stand behind every repair.
+            </p>
+          </div>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/contact" className="btn btn-primary">Request a Free Quote</Link>
-          <a href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`} className="btn btn-accent">Call {SITE.phone}</a>
+          {/* Feature chips */}
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {heroBullets.map(({ icon: Icon, text }) => (
+              <li
+                key={text}
+                className="flex items-center gap-3 rounded-xl bg-white px-3 py-2 shadow-sm border"
+              >
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--surface-muted)] text-[var(--color-primary)]">
+                  <Icon className="h-4 w-4" />
+                </span>
+                <span className="text-sm text-gray-800">{text}</span>
+              </li>
+            ))}
+          </ul>
+
+          {/* CTAs */}
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/contact" className="btn btn-primary">Request a Free Quote</Link>
+            <a href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`} className="btn btn-accent">Call {SITE.phone}</a>
+          </div>
         </div>
       </Section>
 
-      {/* WHAT WE OFFER - consistent with rest of design */}
+      {/* WHAT WE OFFER */}
       <Section
         title="What We Offer"
         subtitle="We maintain and repair European vehicles with precision tools and factory-grade procedures."
