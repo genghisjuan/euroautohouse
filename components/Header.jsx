@@ -16,7 +16,7 @@ export default function Header(){
       <div className="container-tight flex items-center justify-between h-16">
         <Link href="/" className="flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="Euro Auto House" className="h-8"/>
+          <img src="/logo.png" alt="Euro Auto House" className="h-8"/>
           <span className="font-extrabold" style={{fontFamily:'Poppins'}}>Euro Auto House</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
