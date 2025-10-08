@@ -1,45 +1,44 @@
 import Section from "@/components/Section";
-import InstagramEmbed from "@/components/InstagramEmbed";
-import { SITE } from "@/config/site.config";
+import Image from "next/image";
 
-export const metadata = { title: "Gallery (Instagram) | Euro Auto House" };
+export const metadata = { title: "Gallery | Euro Auto House" };
 
-const IG_EMBED = process.env.NEXT_PUBLIC_IG_EMBED_URL || "";
+const galleryImages = [
+  { src: "/images/gallery1.jpg", alt: "Euro Auto House Workshop" },
+  { src: "/images/gallery2.jpg", alt: "Mercedes-Benz Maintenance" },
+  { src: "/images/gallery3.jpg", alt: "BMW Engine Diagnostics" },
+  { src: "/images/gallery4.jpg", alt: "Audi Performance Service" },
+  { src: "/images/gallery5.jpg", alt: "VW Repair Bay" },
+  { src: "/images/gallery6.jpg", alt: "Certified Technicians at Work" },
+];
 
 export default function Gallery() {
   return (
     <Section
-      title="Gallery"
-      subtitle="Live from Instagram — recent projects, shop moments, and customer favorites."
+      title="Our Gallery"
+      subtitle="A glimpse inside our facility — where precision, quality, and European engineering meet expert care."
     >
-      {IG_EMBED ? (
-        <InstagramEmbed src={IG_EMBED} />
-      ) : (
-        <div className="card space-y-4">
-          <h3 className="text-xl font-bold">Instagram feed not connected (no token needed)</h3>
-          <p className="opacity-80">
-            Add a free embed URL to show the live feed here. Until then, you can view our work on Instagram.
-          </p>
-          <div className="flex gap-3">
-            <a
-              href={SITE.social.instagram}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-primary"
-            >
-              Open Instagram
-            </a>
-            <a
-              href="https://snapwidget.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-accent"
-            >
-              Get a free embed URL
-            </a>
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+        {galleryImages.map((img, index) => (
+          <div
+            key={index}
+            className="relative group overflow-hidden rounded-2xl shadow-lg transition-transform duration-300 hover:scale-[1.02]"
+          >
+            <Image
+              src={img.src}
+              alt={img.alt}
+              width={600}
+              height={400}
+              className="object-cover w-full h-64 md:h-72"
+            />
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+              <p className="text-white text-lg font-semibold text-center px-4">
+                {img.alt}
+              </p>
+            </div>
           </div>
-        </div>
-      )}
+        ))}
+      </div>
     </Section>
   );
 }
