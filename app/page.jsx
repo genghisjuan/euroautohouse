@@ -10,52 +10,38 @@ export default function HomePage() {
   return (
     <>
       {/* HERO SECTION */}
-<section className="relative flex items-center justify-center min-h-[78vh] bg-black text-white">
-  {/* Background image */}
-  <Image
-    src="/hero.jpg"
-    alt="Euro Auto House Mercedes"
-    fill
-    priority
-    className="object-cover brightness-[0.58]"
-  />
-  {/* Subtle overlay for readability */}
-  <div className="absolute inset-0 bg-black/20" />
+            fill
+            className="object-cover brightness-[0.7]"
+            priority
+          />
+        </div>
 
-  {/* Content */}
-  <div className="relative z-10 text-center px-4 max-w-3xl">
-    <h1 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight">
-      Full-Service Diagnostics for Your Luxury
-      <br className="hidden md:block" />
-      Vehicle
-    </h1>
+        <div className="container-tight py-28 text-center text-white max-w-3xl">
+          <h1 className="h1 text-white mb-3">
+            Full-Service Diagnostics for Your Luxury Vehicle
+          </h1>
+          <p className="lead mb-8 text-gray-200">
+            Dealer-level care for Mercedes-Benz, BMW, VW, and Audi owners.  
+            Expert technicians who explain your car in plain English—and stand behind every repair.
+          </p>
 
-    <p className="mt-4 text-base md:text-lg text-white/90">
-      Dealer-level care for Mercedes-Benz, BMW, VW, and Audi owners. Expert technicians who
-      explain your car in plain English—and stand behind every repair.
-    </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/contact" className="btn btn-primary">
+              Request a Quote
+            </Link>
+            <a href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`} className="btn btn-accent">
+              Call {SITE.phone}
+            </a>
+          </div>
 
-    <div className="mt-6 flex flex-wrap justify-center gap-4">
-      <Link href="/contact" className="btn btn-primary">
-        Request a Quote
-      </Link>
-      <a
-        href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`}
-        className="btn bg-[var(--color-accent)] text-black font-semibold hover:opacity-90"
-      >
-        Call {SITE.phone}
-      </a>
-    </div>
-
-    {/* Trust badges row */}
-    <div className="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm text-white/85">
-      <span>ASE Certified</span>
-      <span>OEM Diagnostics</span>
-      <span>Mobil 1® Oils</span>
-      <span>Warranty-Friendly</span>
-    </div>
-  </div>
-</section>
+          <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-300">
+            <span>ASE Certified</span>
+            <span>OEM Diagnostics</span>
+            <span>Mobil 1® Oils</span>
+            <span>Warranty-Friendly</span>
+          </div>
+        </div>
+      </section>
 
       {/* STATS BAR */}
       <section className="bg-neutral-50 py-10 border-b">
