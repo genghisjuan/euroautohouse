@@ -16,20 +16,20 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white backdrop-blur border-b border-neutral-800">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur border-b border-neutral-800">
       <div className="container-tight flex items-center justify-between h-16 md:h-20">
+        {/* LOGO ONLY (no text) */}
         <Link href="/" className="flex items-center gap-3">
-          {/* LOGO ONLY (no text) */}
           <Image
-            src="/logo.png" // make sure the file exists in public/logo.png
+            src="/logo.png"  // Make sure your logo is in /public/logo.png
             alt={SITE.businessName}
-            width={200}     // larger size
+            width={200}       // Larger for visibility
             height={64}
-            className="h-14 md:h-16 w-auto" // proportionally scaled for retina clarity
+            className="h-14 md:h-16 w-auto object-contain"
             priority
           />
         </Link>
-    
+
         {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-5">
           {SITE.nav.map((n) => (
@@ -41,34 +41,32 @@ export default function Header() {
               {n.label}
             </Link>
           ))}
-    
+
           <a
             href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`}
             className="btn bg-[var(--color-primary)] text-white text-sm md:text-[0.9rem] px-4 py-2 rounded-full font-semibold hover:brightness-110"
           >
             {SITE.phone}
           </a>
-    
+
           <div className="ml-2">
             <ThemeToggle />
           </div>
-    </nav>
+        </nav>
 
-    {/* MOBILE MENU BUTTON */}
-    <button
-      aria-label="Open menu"
-      className="md:hidden text-white text-2xl"
-      onClick={() => setOpen(!open)}
-    >
-      ☰
-    </button>
-  </div>
-</header>
-
+        {/* MOBILE MENU BUTTON */}
+        <button
+          aria-label="Open menu"
+          className="md:hidden text-white text-2xl"
+          onClick={() => setOpen(!open)}
+        >
+          ☰
+        </button>
+      </div>
 
       {/* MOBILE NAV */}
       {open && (
-        <div className="md:hidden border-t border-neutral-800 bg-black text-white">
+        <div className="md:hidden border-t border-neutral-800 bg-black/95 text-white">
           <div className="container-tight py-3 flex flex-col gap-3">
             {SITE.nav.map((n) => (
               <Link
@@ -80,13 +78,16 @@ export default function Header() {
                 {n.label}
               </Link>
             ))}
+
             <SocialIcons />
+
             <a
               href={`tel:${SITE.phone.replace(/[^\d]/g, "")}`}
               className="btn bg-[var(--color-primary)] text-white hover:brightness-110"
             >
               Call {SITE.phone}
             </a>
+
             <div className="pt-1">
               <ThemeToggle />
             </div>
